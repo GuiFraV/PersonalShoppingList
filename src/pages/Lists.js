@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 // import useDataFetching from '../hooks/useDataFetching';
@@ -36,7 +36,13 @@ const Lists = () => {
   //   'https://my-json-server.typicode.com/PacktPublishing/React-Projects-Second-Edition/lists',
   // );
 
-  const { loading, error, lists } = useContext(ListsContext);
+  // const { loading, error, lists } = useContext(ListsContext);
+
+  const { loading, error, lists, fetchLists } = useContext(ListsContext)
+
+  useEffect(() => {
+    !lists.length && fetchLists()
+  }, [fetchLists, lists])
 
   return (
     <>
